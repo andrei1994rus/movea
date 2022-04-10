@@ -4,6 +4,25 @@
     box-sizing: border-box;
 }
 
+@font-face {
+    font-family: 'Roboto';
+    src: url('../fonts/Roboto-Bold.ttf');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('../fonts/Roboto-Medium.ttf');
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('../fonts/Roboto-Regular.ttf');
+    font-weight: normal;
+}
+
+
 html,
 body {
     font-size: 62.5%;
@@ -43,10 +62,6 @@ h6 {
     margin: 0;
 }
 
-header_logo {
-    font-size: 6.4rem;
-}
-
 button,
 input {
     outline: none;
@@ -69,9 +84,9 @@ input {
 .grid {
     display: grid;
     grid-template-areas:
-    "my-header my-header"
-    "my-aside my-main"
-    "my-aside my-main";
+    "my-header my-header my-header"
+    "my-aside my-main my-main"
+    "my-aside my-main my-main";
     grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
     gap: 8rem 0;
 }
@@ -89,7 +104,9 @@ input {
 
 .header__logo {
     font-size: 6.4rem;
+    line-height: 117%;
     margin-right: 7rem;
+    font-weight: bold;
 }
 
 .header__nav {
@@ -97,7 +114,9 @@ input {
 }
 
 .header__nav a {
+    font-weight: 500;
     font-size: 2.4rem;
+    line-height: 117%;
 }
 
 .header__nav a:not(:last-child) {
@@ -128,11 +147,13 @@ input {
     padding-left: 1rem;
     padding-right: 4rem;
     font-size: 2rem;
+    line-height: 115%;
     color: #ffffff;
 }
 
 .header__find input::placeholder {
     font-size: 2rem;
+    line-height: 115%;
     color: #ffffff;
 }
 
@@ -143,16 +164,270 @@ input {
 
 .header__time {
     font-size: 2rem;
+    line-height: 115%;
 }
 
 .header__day {
     font-size: 1.2rem;
+    line-height: 117%;
 }
 
 .header__personal {
     width: 6rem;
     height: 6rem;
     border-radius: 50%;
+}
+
+.main-display__trailer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 98.5%;
+    height: 20.2rem;
+    background: url('../img/back_trailer.png');
+    filter: brightness(40%);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 1.6rem;
+    padding: 1.9rem 0 1.9rem 1.9rem;
+}
+
+.main-display__views {
+    font-weight: 700;
+    font-size: 1.6rem;
+    line-height: 119%;
+}
+
+.main-display__header {
+    font-weight: bold;
+    font-size: 2.4rem;
+    line-height: 150%;
+}
+
+.main-display__date {
+    font-weight: bold;
+    font-size: 1.4rem;
+    line-height: 114%;
+    padding-bottom: 1.9rem 0 1.9rem 1.9rem;
+}
+
+.button-play__wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    cursor: pointer;
+    width:8.1rem;
+    height:8.1rem;
+    filter: blur(.1rem);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+}
+
+.button-play {
+    display: flex;
+    width: 3rem;
+    height: 3rem;
+    border-radius: .2rem;
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+    padding-right: 1rem;
+}
+
+.title__left, .title__right {
+    display: flex;
+    align-items: center;
+}
+
+.title__main
+{
+    font-size: 2rem;
+    line-height: 115%;
+}
+
+.title__right span {
+    font-size: 1.4rem;
+    line-height: 114%;
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.title__right img {
+    width: 2rem;
+    height: 1.6rem;
+    margin-left: .4rem;
+}
+
+.title__count {
+    margin-left: 2rem;
+    font-size: 2rem;
+    line-height: 114%;
+    color: rgba(255, 255, 255, 0.2);
+    padding-top: .3rem;
+}
+
+.trending, .popular {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 1.6rem;
+}
+
+
+.trending__item {
+    display: flex;
+    position: relative;
+    align-items: flex-end;
+    width: 48%;
+    height: 25.1rem;
+    background: url('../img/back_trending.png');
+    filter: brightness(40%);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: 1.6rem;
+}
+
+.trending__plash {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    background: rgba(255, 255, 255, 0.3);
+    filter: blur(.01rem);
+    border-radius: 1.6rem;
+    padding: .4rem 1.3rem 
+}
+
+.trending__plash span {
+    font-size: 1.4rem;
+    line-height: 114%;
+}
+
+.trending__plash img {
+    width: 1.4rem;
+    height: 1.4rem;
+
+}
+.trending__footer, .popular__footer {
+    width: 100%;
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 1.6rem;
+    padding: 1.8rem 1rem 1.8rem 6.4rem;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.small {
+    width: 5rem;
+    height: 5rem;
+    left: 7%;
+}
+
+.button-play__wrap.small .button-play {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: .2rem;
+}
+
+
+.trending__header {
+    font-weight: bold;
+    font-size: 1.5rem;
+    line-height: 150%;
+}
+
+.trending__date {
+    font-weight: bold;
+    font-size: 1rem;
+    line-height: 120%;
+}
+
+.trending__time {
+    background: #FFFFFF;
+    border-radius: 1.6rem;
+    font-weight: normal;
+    font-size: 1.4rem;
+    line-height: 114%;
+    color: #171618;
+    padding: .4rem 1.3rem;
+}
+
+.popular__item {
+    display: flex;
+    position: relative;
+    align-items: flex-end;
+    width: 30%;
+    height: 19.2rem;
+    background: url('../img/back_popular.png');
+    filter: brightness(40%);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: 1.6rem;
+}
+
+.small-plus {
+    width: 3rem;
+    height: 3rem;
+    left: 8%;
+}
+
+.button-play__wrap.small-plus .button-play {
+    width: 1.1rem;
+    height: 1.1rem;
+    border-radius: .2rem;
+}
+
+.button-play__wrap.small-plus {
+    background: rgba(255, 255, 255, 0.5);
+    filter: blur(.01rem);
+}
+
+.popular__title {
+    position: absolute;
+    top: 15%;
+    left: 20%;
+}
+
+.popular__header {
+    font-weight: bold;
+    font-size: 1.2rem;
+    line-height: 150%;
+}
+
+.popular__date {
+    font-weight: bold;
+    font-size: 1rem;
+    line-height: 120%;
+}
+
+.popular__rating {
+    display: flex;
+    align-items: center;
+}
+
+.popular__rating span {
+    font-weight: bold;
+    font-size: 1rem;
+    line-height: 120%;
+    margin-left: .4rem;
+}
+
+.popular__img {
+    height: 1.5rem;
+    width: 1.5rem;
+    margin-right: 0.4rem;
+    border-radius: .2rem;
 }
 
 @media (max-width: 108em) {

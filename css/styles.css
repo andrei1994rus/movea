@@ -183,18 +183,19 @@ input {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background: url('../img/back_trailer.jpg');
     width: 98.5%;
     height: 20.2rem;
-    background: url('../img/back_trailer.png');
-    filter: brightness(40%);
     background-repeat: no-repeat;
+    background-position: center;
     background-size: cover;
     border-radius: 1.6rem;
     padding: 1.9rem 0 1.9rem 1.9rem;
+    overflow: hidden;
 }
 
 .main-display__views {
-    font-weight: 700;
+    font-weight: bold;
     font-size: 1.6rem;
     line-height: 119%;
 }
@@ -226,6 +227,17 @@ input {
     transform: translate(-50%, -50%);
     background: rgba(255, 255, 255, 0.3);
     border-radius: 50%;
+    z-index: 1;
+}
+
+.main-display__trailer::after, .trending__item::after, .popular__item::after {
+    content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .button-play {
@@ -294,6 +306,7 @@ input {
     background-size: cover;
     background-position: center;
     border-radius: 1.6rem;
+    overflow: hidden;
 }
 
 .trending__plash {
@@ -324,7 +337,8 @@ input {
     align-items: center;
     border-radius: 1.6rem;
     padding: 1.8rem 1rem 1.8rem 6.4rem;
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.4);
+    z-index: 1;
 }
 
 .small {
@@ -369,11 +383,11 @@ input {
     width: 30%;
     height: 19.2rem;
     background: url('../img/back_popular.png');
-    filter: brightness(40%);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     border-radius: 1.6rem;
+    overflow: hidden;
 }
 
 .small-plus {

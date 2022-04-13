@@ -88,7 +88,7 @@ input {
     "my-aside my-main my-main"
     "my-aside my-main my-main";
     grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-    gap: 8rem 0;
+    gap: 3rem 0;
 }
 
 .grid-init {
@@ -100,6 +100,10 @@ input {
 .header__wrap {
     display: flex;
     align-items: center;
+}
+
+.header {
+    box-shadow: 0 .4rem 1rem rgba(255,255,255,0.07);
 }
 
 .header__logo {
@@ -117,6 +121,10 @@ input {
     font-weight: 500;
     font-size: 2.4rem;
     line-height: 117%;
+}
+
+.header__nav .current {
+    border-bottom: .3rem solid #FFFFFF;
 }
 
 .header__nav a:not(:last-child) {
@@ -176,6 +184,10 @@ input {
     width: 6rem;
     height: 6rem;
     border-radius: 50%;
+}
+
+.main-display {
+    padding-top: 5rem;
 }
 
 .main-display__trailer {
@@ -450,6 +462,32 @@ input {
     position: relative;
 }
 
+.aside::after {
+    content: url('../img/aside-triangle.svg');
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2.2rem;
+    height: 2.6rem;
+    background: #FCFCFE;
+    border-radius: 2rem;
+    top: 10.7rem;
+    right: 4.9rem;
+    cursor: pointer;
+}
+
+.aside__wrap {
+    background: rgba(255, 255, 255, 0.02);
+    margin-left: -2.4rem;
+}
+
+.aside__top {
+    padding: 5rem 2.3rem 4rem 2.4rem;
+    background: #171618;
+    border: .1rem solid #1C1B1F;
+}
+
 .aside__title {
     display: flex;
     align-items: center;
@@ -531,6 +569,24 @@ input {
     z-index: 10;
 }
 
+.aside__footer-bottom {
+    position: relative;
+}
+
+.aside__footer-bottom::before {
+    position: absolute;
+    top: -50%;
+    left: 0;
+    transform: translate(0, 50%);
+    content: '';
+    display: block;
+    width: 6.5rem;
+    height: .1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.1);
+    z-index: 10;
+}
+
 .aside__item-name {
     margin-bottom: .5rem;
     font-weight: bold;
@@ -544,14 +600,12 @@ input {
     line-height: 114%;
 }
 
-.aside__item:nth-child(2) {
+.aside__item:nth-child(3) {
     margin-top: 3rem;
-    margin-bottom: 4rem;
 }
 
 .aside__bottom {
     padding: 2.5rem 0 2.5rem 2.4rem;
-    background: rgba(255, 255, 255, 0.02);
 }
 
 .aside__favourite {
@@ -615,6 +669,33 @@ input {
     margin-right: .5rem;
 }
 
+.modal {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: rgba(0,0,0,.5);
+    padding: 3rem 0;
+    z-index: 40;
+    display: none;
+}
+
+.modal__inner {
+    width: 100rem;
+    height: 100rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.active {
+    display: flex;
+}
 
 @media (max-width: 108em) {
     html {

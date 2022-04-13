@@ -16,7 +16,7 @@
             <div class="header__wrap">
                 <a href="#" class="header__logo">MOVEA</a>
                 <nav class="header__nav">
-                    <a href="#">Movies</a>
+                    <a class="current" href="#">Movies</a>
                     <a href="#">TV shows</a>
                     <a href="#">Animations</a>
                     <a href="#">Plans</a>
@@ -28,212 +28,222 @@
                     <div class="header__time">19:55</div>
                     <div class="header__day">March 30</div>
                 </div>
-                <div class="header__personal">
+                <a class="header__personal" href="#">
                     <img src="img/avatar.png" alt="img">
-                </div>
+                </a>
         </header>
-        <aside class="aside box-init">
-            <div class="aside__title">
-                <div class="aside__header">New Trailers</div>
-                <div class="aside__sort">
-                    <div class="aside__sort-text">Sort By</div>
-                    <div class="aside__sort-select">
-                        <span>Today</span>
-                        <div class="aside__sort-img">
-                            <img src="img/arrow-up.png" alt="up">
-                            <img src="img/arrow-down.png" alt="down">
+        <aside class="aside">
+            <div class="aside__wrap">
+                <div class="aside__top">
+                    <div class="aside__title">
+                        <div class="aside__header">New Trailers</div>
+                        <div class="aside__sort">
+                            <div class="aside__sort-text">Sort By</div>
+                            <div class="aside__sort-select">
+                                <span>Today</span>
+                                <div class="aside__sort-img">
+                                    <img src="img/arrow-up.png" alt="up">
+                                    <img src="img/arrow-down.png" alt="down">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="aside__item">
+                        <div class="aside__views">Views 4.5k</div>
+                        <div class="aside__footer">
+                            <div class="aside__item-name">Batman 2022</div>
+                            <div class="aside__item-date">Dec 2022</div>
+                        </div>
+                        <div class="button-play__wrap">
+                            <div class="button-play batman_trailer-js">
+                                <img src="img/triangle.png" alt="triangle">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="aside__item">
+                        <div class="aside__views">Views 4.5k</div>
+                        <div class="aside__footer">
+                            <div class="aside__item-name">Batman 2022</div>
+                            <div class="aside__item-date">Dec 2022</div>
+                        </div>
+                        <div class="button-play__wrap">
+                            <div class="button-play batman_trailer-js">
+                                <img src="img/triangle.png" alt="triangle">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="aside__item">
-                <div class="aside__views">Views 4.5k</div>
-                <div class="aside__footer">
-                    <div class="aside__item-name">Batman 2022</div>
-                    <div class="aside__item-date">Dec 2022</div>
-                </div>
-                <div class="button-play__wrap">
-                    <div class="button-play">
-                        <img src="img/triangle.png" alt="triangle">
+                <div class="aside__bottom">
+                    <div class="aside__favourite">
+                        <div class="aside__favourite-text">Favourite genres</div>
+                        <div class="aside__genre-items">
+                            <div class="aside__genre purple">Action</div>
+                            <div class="aside__genre orange">Western</div>
+                            <div class="aside__genre purple">Adventures</div>
+                            <div class="aside__genre orange">Drama</div>
+                            <div class="aside__genre green">Comedy</div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="aside__item">
-                <div class="aside__views">Views 4.5k</div>
-                <div class="aside__footer">
-                    <div class="aside__item-name">Batman 2022</div>
-                    <div class="aside__item-date">Dec 2022</div>
-                </div>
-                <div class="button-play__wrap">
-                    <div class="button-play">
-                        <img src="img/triangle.png" alt="triangle">
-                    </div>
-                </div>
-            </div>
-            <div class="aside__bottom">
-                <div class="aside__favourite">
-                    <div class="aside__favourite-text">Favourite genres</div>
-                    <div class="aside__genre-items">
-                        <div class="aside__genre purple">Action</div>
-                        <div class="aside__genre orange">Western</div>
-                        <div class="aside__genre purple">Adventures</div>
-                        <div class="aside__genre orange">Drama</div>
-                        <div class="aside__genre green">Comedy</div>
-                    </div>
-                </div>
-                <div class="aside__footer">
-                    <div class="aside__add">
-                        <div class="aside__add-round">+</div>
-                        <span>Add your favourite genres</span>
-                    </div>
-                    <div class="aside__genre-items">
-                        <div class="aside__genre gray">Drama</div>
-                        <div class="aside__genre gray">Comedy</div>
-                        <div class="aside__genre gray">Comedy</div>
+                    <div class="aside__footer-bottom">
+                        <div class="aside__add">
+                            <div class="aside__add-round">+</div>
+                            <span>Add your favourite genres</span>
+                        </div>
+                        <div class="aside__genre-items">
+                            <div class="aside__genre gray">Drama</div>
+                            <div class="aside__genre gray">Comedy</div>
+                            <div class="aside__genre gray">Comedy</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </aside>
         <main class="main">
-            <div class="main-display__trailer">
-                <div class="main-display__views">Views 77k</div>
-                <div class="main-display__main">
-                    <h1 class="main-display__header">Spider-Man: No Way Home</h1>
-                    <div class="main-display__date">Feb 2021</div>
-                </div>
-                <div class="button-play__wrap">
-                    <div class="button-play">
-                        <img src="img/triangle.png" alt="triangle">
+            <div class="main-display">
+                <div class="main-display__trailer">
+                    <div class="main-display__views">Views 77k</div>
+                    <div class="main-display__main">
+                        <h1 class="main-display__header">Spider-Man: No Way Home</h1>
+                        <div class="main-display__date">Feb 2021</div>
                     </div>
-                </div>
-            </div>
-            <div class="main-display__trending">
-                <div class="title">
-                    <div class="title__left">
-                        <h2 class="title__main">Continue Watching</h2>
-                        <div class="title__count">4 Movies</div>
-                    </div>
-                    <div class="title__right">
-                        <span>All movies</span>
-                        <img src="img/arrow.svg" alt="arrow">
-                    </div>
-                </div>
-                <div class="trending">
-                    <div class="trending__item">
-                        <div class="trending__plash">
-                            <span>#1 Trending </span>
-                            <img src="img/fire.svg" alt="fire">
-                        </div>
-                        <div class="trending__footer">
-                            <div class="trending__footer-left">
-                                <div class="button-play__wrap small">
-                                    <div class="button-play">
-                                        <img src="img/triangle.png" alt="triangle">
-                                    </div>
-                                </div>
-                                <div class="trending__title">
-                                    <h3 class="trending__header">Spider-Man: No Way Home</h3>
-                                    <div class="trending__date">Feb 2021</div>
-                                </div>
-                            </div>
-                            <div class="trending__time">02:30:00</div>
-                        </div>
-                    </div>
-                    <div class="trending__item">
-                        <div class="trending__footer">
-                            <div class="trending__footer-left">
-                                <div class="button-play__wrap small">
-                                    <div class="button-play">
-                                        <img src="img/triangle.png" alt="triangle">
-                                    </div>
-                                </div>
-                                <div class="trending__title">
-                                    <h3 class="trending__header">Spider-Man: No Way Home</h3>
-                                    <div class="trending__date">Feb 2021</div>
-                                </div>
-                            </div>
-                            <div class="trending__time">02:30:00</div>
+                    <div class="button-play__wrap">
+                        <div class="button-play spiderman_trailer-js">
+                            <img src="img/triangle.png" alt="triangle">
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="main-display__trending">
-                <div class="title">
-                    <div class="title__left">
-                        <h2 class="title__main">Popular movies 2021</h2>
+                <div class="main-display__trending">
+                    <div class="title">
+                        <div class="title__left">
+                            <h2 class="title__main">Continue Watching</h2>
+                            <div class="title__count">4 Movies</div>
+                        </div>
+                        <div class="title__right">
+                            <span>All movies</span>
+                            <img src="img/arrow.svg" alt="arrow">
+                        </div>
                     </div>
-                    <div class="title__right">
-                        <span>All movies</span>
-                        <img src="img/arrow.svg" alt="arrow">
+                    <div class="trending">
+                        <div class="trending__item">
+                            <div class="trending__plash">
+                                <span>#1 Trending </span>
+                                <img src="img/fire.svg" alt="fire">
+                            </div>
+                            <div class="trending__footer">
+                                <div class="trending__footer-left">
+                                    <div class="button-play__wrap small">
+                                        <div class="button-play spiderman_movie-js">
+                                            <img src="img/triangle.png" alt="triangle">
+                                        </div>
+                                    </div>
+                                    <div class="trending__title">
+                                        <h3 class="trending__header">Spider-Man: No Way Home</h3>
+                                        <div class="trending__date">Feb 2021</div>
+                                    </div>
+                                </div>
+                                <div class="trending__time">02:30:00</div>
+                            </div>
+                        </div>
+                        <div class="trending__item">
+                            <div class="trending__footer">
+                                <div class="trending__footer-left">
+                                    <div class="button-play__wrap small">
+                                        <div class="button-play spiderman_movie-js">
+                                            <img src="img/triangle.png" alt="triangle">
+                                        </div>
+                                    </div>
+                                    <div class="trending__title">
+                                        <h3 class="trending__header">Spider-Man: No Way Home</h3>
+                                        <div class="trending__date">Feb 2021</div>
+                                    </div>
+                                </div>
+                                <div class="trending__time">02:30:00</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="popular">
-                    <div class="popular__item">
-                        <div class="popular__footer">
-                            <div class="popular__footer-left">
-                                <div class="button-play__wrap small-plus">
-                                    <div class="button-play">
-                                        <img src="img/triangle.png" alt="triangle">
-                                    </div>
-                                </div>
-                                <div class="popular__title">
-                                    <h3 class="popular__header">Spider-Man: No Way Home</h3>
-                                    <div class="popular__date">Feb 2021</div>
-                                </div>
-                            </div>
-                            <div class="popular__rating">
-                                <div class="popular__img">
-                                    <img src="img/star.svg" alt="star">
-                                </div>
-                                <span>4,7</span>
-                            </div>
+                <div class="main-display__trending">
+                    <div class="title">
+                        <div class="title__left">
+                            <h2 class="title__main">Popular movies 2021</h2>
+                        </div>
+                        <div class="title__right">
+                            <span>All movies</span>
+                            <img src="img/arrow.svg" alt="arrow">
                         </div>
                     </div>
-                    <div class="popular__item">
-                        <div class="popular__footer">
-                            <div class="popular__footer-left">
-                                <div class="button-play__wrap small-plus">
-                                    <div class="button-play">
-                                        <img src="img/triangle.png" alt="triangle">
+                    <div class="popular">
+                        <div class="popular__item">
+                            <div class="popular__footer">
+                                <div class="popular__footer-left">
+                                    <div class="button-play__wrap small-plus">
+                                        <div class="button-play spiderman_movie-js">
+                                            <img src="img/triangle.png" alt="triangle">
+                                        </div>
+                                    </div>
+                                    <div class="popular__title">
+                                        <h3 class="popular__header">Spider-Man: No Way Home</h3>
+                                        <div class="popular__date">Feb 2021</div>
                                     </div>
                                 </div>
-                                <div class="popular__title">
-                                    <h3 class="popular__header">Spider-Man: No Way Home</h3>
-                                    <div class="popular__date">Feb 2021</div>
+                                <div class="popular__rating">
+                                    <div class="popular__img">
+                                        <img src="img/star.svg" alt="star">
+                                    </div>
+                                    <span>4,7</span>
                                 </div>
-                            </div>
-                            <div class="popular__rating">
-                                <div class="popular__img">
-                                    <img src="img/star.svg" alt="star">
-                                </div>
-                                <span>4,7</span>
                             </div>
                         </div>
-                    </div>
-                    <div class="popular__item">
-                        <div class="popular__footer">
-                            <div class="popular__footer-left">
-                                <div class="button-play__wrap small-plus">
-                                    <div class="button-play">
-                                        <img src="img/triangle.png" alt="triangle">
+                        <div class="popular__item">
+                            <div class="popular__footer">
+                                <div class="popular__footer-left">
+                                    <div class="button-play__wrap small-plus">
+                                        <div class="button-play spiderman_movie-js">
+                                            <img src="img/triangle.png" alt="triangle">
+                                        </div>
+                                    </div>
+                                    <div class="popular__title">
+                                        <h3 class="popular__header">Spider-Man: No Way Home</h3>
+                                        <div class="popular__date">Feb 2021</div>
                                     </div>
                                 </div>
-                                <div class="popular__title">
-                                    <h3 class="popular__header">Spider-Man: No Way Home</h3>
-                                    <div class="popular__date">Feb 2021</div>
+                                <div class="popular__rating">
+                                    <div class="popular__img">
+                                        <img src="img/star.svg" alt="star">
+                                    </div>
+                                    <span>4,7</span>
                                 </div>
                             </div>
-                            <div class="popular__rating">
-                                <div class="popular__img">
-                                    <img src="img/star.svg" alt="star">
+                        </div>
+                        <div class="popular__item">
+                            <div class="popular__footer">
+                                <div class="popular__footer-left">
+                                    <div class="button-play__wrap small-plus">
+                                        <div class="button-play spiderman_trailer-js">
+                                            <img src="img/triangle.png" alt="triangle">
+                                        </div>
+                                    </div>
+                                    <div class="popular__title">
+                                        <h3 class="popular__header">Spider-Man: No Way Home</h3>
+                                        <div class="popular__date">Feb 2021</div>
+                                    </div>
                                 </div>
-                                <span>4,7</span>
+                                <div class="popular__rating">
+                                    <div class="popular__img">
+                                        <img src="img/star.svg" alt="star">
+                                    </div>
+                                    <span>4,7</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </main>
+    </div>
+
+    <div class="modal">
+        <div class="modal__inner"></div>
     </div>
 
     <script src="js/main.js"></script>

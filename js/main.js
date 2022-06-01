@@ -2,7 +2,7 @@ const modalWindow=document.querySelector('.modal');
 const modalInner=modalWindow.firstElementChild;
 const buttonShowModalSpidermanTrailer=document.querySelectorAll('.spiderman_trailer-js');
 const buttonShowModalBatmanTrailer=document.querySelectorAll('.batman_trailer-js');
-const buttonSpidermanMovie=document.querySelectorAll('.spiderman_movie-js');
+let buttonShowModalSpidermanMovie;
 const headerPersonal=document.querySelector('.header__personal');
 const headerNavLink=document.querySelectorAll('.header__nav a');
 const headerTime=document.querySelector('.header__time');
@@ -14,6 +14,9 @@ const divPopular=document.querySelector('.popular-js');
 const nonSelectedGenres=document.querySelectorAll('.gray');
 const asideAdd=document.querySelector('.aside__add');
 const favouriteGenres=document.querySelector('.favourite-js');
+const searchBar=document.querySelector('.header__find').firstElementChild;
+const autoComBox=document.querySelector('.header__find').lastElementChild;
+
 
 const alertMessage='You are guest. But this site doesn\'t have authorization.';
 
@@ -29,15 +32,57 @@ const colors=
     'Musical' : 'orange'
 };
 
+const suggestions=[
+    {
+        name: 'Batman 2022',
+        type: 'Trailer',
+        icon: 'https://andrei1994rus.github.io/movea/img/aside_item.png'
+    },
+    {
+        name: 'Spider-Man: No Way Home',
+        type: 'Trailer',
+        icon: 'https://andrei1994rus.github.io/movea/img/back_trailer.jpg'
+    },
+    {
+        name: 'Spider-Man: No Way Home',
+        type: 'Trending',
+        icon: 'https://andrei1994rus.github.io/movea/img/back_trending.png'
+    },
+    {
+        name: 'Spider-Man: No Way Home',
+        type: 'Popular',
+        icon: 'https://andrei1994rus.github.io/movea/img/back_popular.png'
+    }
+];
+
 window.onload=()=>
 {
     time();
 
     bindTitleTrendingAllMovies();
     bindTitlePopularAllMovies();
+    bindButtonShowModalSpidermanMovie();
 
 	this.interval=setInterval(()=>time(),1000);
 };
+
+const outputSpiderManMovie=()=>
+{
+    modalWindow.classList.add('active');    
+    modalInner.innerHTML=`${spiderman_movie}`;
+}
+
+const bindButtonShowModalSpidermanMovie=()=>
+{
+    buttonShowModalSpidermanMovie=document.querySelectorAll('.spiderman_movie-js');
+    buttonShowModalSpidermanMovie.forEach(item=>
+    {
+        item.addEventListener('click',()=>
+        {
+            outputSpiderManMovie();
+        });
+    });
+}
 
 const bindTitleTrendingAllMovies=()=>
 {
@@ -53,11 +98,13 @@ const bindTitleTrendingAllMovies=()=>
         
         else
         {
-            const popularShown=document.querySelector('.trending.shown');
+            const trendingShown=divTrending.querySelector('.shown');
             divTrending.firstElementChild.removeChild(this);
-            divTrending.removeChild(popularShown);
+            divTrending.removeChild(trendingShown);
             addTitleTrendingAllMovies('All movies');
         }
+
+        bindButtonShowModalSpidermanMovie();
     });
 };
 
@@ -75,11 +122,13 @@ const bindTitlePopularAllMovies=()=>
         
         else
         {
-            const popularShown=document.querySelector('.popular.shown');
+            const popularShown=divPopular.querySelector('.shown');
             divPopular.firstElementChild.removeChild(this);
             addTitlePopularAllMovies('All movies');
             divPopular.removeChild(popularShown);
         }
+
+        bindButtonShowModalSpidermanMovie();
     });
 };
 
@@ -115,9 +164,11 @@ const addTitlePopularAllMovies=text=>
     }
 };
 
+const addZeroInTime=time=>(time>=10) ?  time : `0${time}`;
+
 const time=()=>
 {
-    let time=`${new Date().getHours()}:${new Date().getMinutes()}`;
+    let time=`${addZeroInTime(new Date().getHours())}:${addZeroInTime(new Date().getMinutes())}`;
     let months={
         0: 'January',
         1: 'February',
@@ -260,37 +311,43 @@ const popular__all_movies=`
     </div>
 </div>`;
 
+const outputSpidermanTrailer=()=>
+{
+    modalWindow.classList.add('active');
+    modalInner.innerHTML=`${spiderman_trailer}`;
+}
+
 buttonShowModalSpidermanTrailer.forEach(item=>
 {
     item.addEventListener('click',()=>
     {
-        modalWindow.classList.add('active');
-        modalInner.innerHTML=`${spiderman_trailer}`;
+        outputSpidermanTrailer();
     });
 });
+
+const outputBatmanTrailer=()=>
+{
+    modalWindow.classList.add('active');
+    modalInner.innerHTML=`${batman_trailer}`;
+}
 
 buttonShowModalBatmanTrailer.forEach(item=>
 {
     item.addEventListener('click',()=>
     {
-        modalWindow.classList.add('active');
-        modalInner.innerHTML=`${batman_trailer}`;
+        outputBatmanTrailer();
     });
 });
 
-buttonSpidermanMovie.forEach(item=>
+modalWindow.addEventListener('click',e=>
 {
-    item.addEventListener('click',()=>
+    const video=modalInner.querySelector('video');
+    
+    if(e.target!==video) /* click modal (excluding video) */
     {
-        modalVideoWindow.classList.add('active');
-        modalVideoInner.innerHTML=`${spiderman_movie}`;
-    });
-});
-
-modalWindow.addEventListener('click',()=>
-{
-    modalWindow.classList.remove('active');
-    modalInner.innerHTML=``;
+        modalWindow.classList.remove('active');
+        modalInner.innerHTML=``;
+    }
 });
 
 headerPersonal.addEventListener('click',()=>alert(alertMessage));
@@ -327,3 +384,101 @@ asideAdd.addEventListener('click',()=>
         }
     });
 });
+
+searchBar.addEventListener('keyup',e=>
+{
+    let userData=e.target.value;
+    let resultArray=[];
+
+    if(userData)
+    {
+        userData=userData.toLocaleLowerCase();
+        resultArray=suggestions.filter(data=>
+        {
+            let {name}=data;
+            return name.toLocaleLowerCase().startsWith(userData);
+        });
+        
+        autoComBox.classList.add('active');
+        showSuggestions(resultArray);
+        
+        let arrList=autoComBox.querySelectorAll('li');
+        for(item of arrList)
+        {
+            bindItem(item,resultArray);
+        }
+    }
+
+    else
+    {
+        autoComBox.classList.remove('active');
+        autoComBox.innerHTML='';
+    }
+});
+
+const outputVideo=suggestion=>
+{
+    let {name,type}=suggestion;
+
+    if(name=='Batman 2022' && type=='Trailer')
+    {
+        outputBatmanTrailer();
+    }
+
+    else if(name=='Spider-Man: No Way Home')
+    {
+        if(type=='Trailer')
+        {
+            outputSpidermanTrailer();
+        }
+
+        else
+        {
+            outputSpiderManMovie();
+        }
+    }
+}
+
+const bindItem=(item,resultArray)=>
+{
+    item.addEventListener('click',()=>
+    {
+        let array=resultArray.filter(data=>
+        {
+            let {name,type}=data;
+            
+            return item.textContent.includes(name) && item.textContent.includes(type);
+        });
+
+        outputVideo(array[0]);
+    });
+};
+
+const showSuggestions=list=>
+{
+    let listData='';
+    
+    if(!list.length)
+    {
+        let warning='<p>not found</p>';
+        listData=`${warning}`;
+    }
+    
+    else
+    {
+        list.forEach(item=>
+        {
+            let {name,type,icon}=item;
+
+            listData+=`
+            <li>
+                <div>
+                    <img src="${icon}" alt="icon">
+                    ${name}
+                    (${type})
+                </div>
+            </li>`;
+        });
+    }
+    autoComBox.innerHTML=listData;
+};

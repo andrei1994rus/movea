@@ -1,5 +1,7 @@
-const modalWindow=document.querySelector('.modal');
-const modalInner=modalWindow.firstElementChild;
+const modalVideoWindow=document.querySelector('.modal-video');
+const modalVideoInner=modalVideoWindow.firstElementChild;
+const modalSearchWindow=document.querySelector('.modal-search');
+const modalSearchInner=modalSearchWindow.firstElementChild;
 const buttonShowModalSpidermanTrailer=document.querySelectorAll('.spiderman_trailer-js');
 const buttonShowModalBatmanTrailer=document.querySelectorAll('.batman_trailer-js');
 let buttonShowModalSpidermanMovie;
@@ -16,7 +18,7 @@ const asideAdd=document.querySelector('.aside__add');
 const favouriteGenres=document.querySelector('.favourite-js');
 const searchBar=document.querySelector('.header__find').firstElementChild;
 const autoComBox=document.querySelector('.header__find').lastElementChild;
-
+const searchIcon=document.querySelector('.header__find img');
 
 const alertMessage='You are guest. But this site doesn\'t have authorization.';
 
@@ -36,22 +38,22 @@ const suggestions=[
     {
         name: 'Batman 2022',
         type: 'Trailer',
-        icon: 'https://andrei1994rus.github.io/movea/img/aside_item.png'
+        icon: 'img/aside_item.png'
     },
     {
         name: 'Spider-Man: No Way Home',
         type: 'Trailer',
-        icon: 'https://andrei1994rus.github.io/movea/img/back_trailer.jpg'
+        icon: 'img/back_trailer.jpg'
     },
     {
         name: 'Spider-Man: No Way Home',
         type: 'Trending',
-        icon: 'https://andrei1994rus.github.io/movea/img/back_trending.png'
+        icon: 'img/back_trending.png'
     },
     {
         name: 'Spider-Man: No Way Home',
         type: 'Popular',
-        icon: 'https://andrei1994rus.github.io/movea/img/back_popular.png'
+        icon: 'img/back_popular.png'
     }
 ];
 
@@ -66,10 +68,10 @@ window.onload=()=>
 	this.interval=setInterval(()=>time(),1000);
 };
 
-const outputSpiderManMovie=()=>
+const outputSpiderManMovieInModalWindow=()=>
 {
-    modalWindow.classList.add('active');    
-    modalInner.innerHTML=`${spiderman_movie}`;
+    modalVideoWindow.classList.add('active');    
+    modalVideoInner.innerHTML=`${spiderman_movie}`;
 }
 
 const bindButtonShowModalSpidermanMovie=()=>
@@ -79,7 +81,7 @@ const bindButtonShowModalSpidermanMovie=()=>
     {
         item.addEventListener('click',()=>
         {
-            outputSpiderManMovie();
+            outputSpiderManMovieInModalWindow();
         });
     });
 }
@@ -200,12 +202,12 @@ const batman_trailer=`<iframe width="560" height="315"
     frameborder="0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
     allowfullscreen></iframe>`;
-const spiderman_movie=`<video width="560" height="315" preload="auto" poster="https://andrei1994rus.github.io/movea/img/poster.png" controls>
-        <source src="https://andrei1994rus.github.io/movea/video/spiderman_trailer.mp4" type="video/mp4">
-        <source src="https://andrei1994rus.github.io/movea/video/spiderman_trailer.webm" type="video/webm">
-        <source src="https://andrei1994rus.github.io/movea/video/spiderman_trailer.ogv" type="video/ogg">
-        <object data="https://andrei1994rus.github.io/movea/video/spiderman_trailer.swf" type="application/x-shockwave-flash">
-            <param name="movie" value="https://andrei1994rus.github.io/movea/video/spiderman_trailer.swf">
+const spiderman_movie=`<video width="560" height="315" preload="auto" poster="img/poster.png" controls>
+        <source src="video/spiderman_trailer.mp4" type="video/mp4">
+        <source src="video/spiderman_trailer.webm" type="video/webm">
+        <source src="video/spiderman_trailer.ogv" type="video/ogg">
+        <object data="video/spiderman_trailer.swf" type="application/x-shockwave-flash">
+            <param name="movie" value="video/spiderman_trailer.swf">
         </object>
     </video>`;
 
@@ -311,42 +313,52 @@ const popular__all_movies=`
     </div>
 </div>`;
 
-const outputSpidermanTrailer=()=>
+const outputSpidermanTrailerInModalWindow=()=>
 {
-    modalWindow.classList.add('active');
-    modalInner.innerHTML=`${spiderman_trailer}`;
+    modalVideoWindow.classList.add('active');
+    modalVideoInner.innerHTML=`${spiderman_trailer}`;
 }
 
 buttonShowModalSpidermanTrailer.forEach(item=>
 {
     item.addEventListener('click',()=>
     {
-        outputSpidermanTrailer();
+        outputSpidermanTrailerInModalWindow();
     });
 });
 
-const outputBatmanTrailer=()=>
+const outputBatmanTrailerInModalWindow=()=>
 {
-    modalWindow.classList.add('active');
-    modalInner.innerHTML=`${batman_trailer}`;
+    modalVideoWindow.classList.add('active');
+    modalVideoInner.innerHTML=`${batman_trailer}`;
 }
 
 buttonShowModalBatmanTrailer.forEach(item=>
 {
     item.addEventListener('click',()=>
     {
-        outputBatmanTrailer();
+        outputBatmanTrailerInModalWindow();
     });
 });
 
-modalWindow.addEventListener('click',e=>
+const closeVideoModal=()=>
 {
-    const video=modalInner.querySelector('video');
+    modalVideoWindow.classList.remove('active');
+    modalVideoInner.innerHTML=``;
+
+    if(modalSearchWindow.classList.contains('hide'))
+    {
+        modalSearchWindow.classList.remove('hide');
+    }
+};
+
+modalVideoWindow.addEventListener('click',e=>
+{
+    const video=modalVideoInner.querySelector('video');
     
     if(e.target!==video) /* click modal (excluding video) */
     {
-        modalWindow.classList.remove('active');
-        modalInner.innerHTML=``;
+        closeVideoModal();
     }
 });
 
@@ -392,12 +404,7 @@ searchBar.addEventListener('keyup',e=>
 
     if(userData)
     {
-        userData=userData.toLocaleLowerCase();
-        resultArray=suggestions.filter(data=>
-        {
-            let {name}=data;
-            return name.toLocaleLowerCase().startsWith(userData);
-        });
+        resultArray=searchFilm(userData);
         
         autoComBox.classList.add('active');
         showSuggestions(resultArray);
@@ -405,52 +412,84 @@ searchBar.addEventListener('keyup',e=>
         let arrList=autoComBox.querySelectorAll('li');
         for(item of arrList)
         {
-            bindItem(item,resultArray);
+            bindItemAutoComBox(item,resultArray);
         }
     }
 
     else
     {
-        autoComBox.classList.remove('active');
-        autoComBox.innerHTML='';
+        clearAutoComBox();
     }
 });
 
-const outputVideo=suggestion=>
+const outputVideo=(suggestion,openedModalWindow=null)=>
 {
     let {name,type}=suggestion;
 
     if(name=='Batman 2022' && type=='Trailer')
     {
-        outputBatmanTrailer();
+        if(openedModalWindow!==null) /* if modalSearchWindow is opened */
+        {
+            modalSearchWindow.classList.add('hide');
+            outputBatmanTrailerInModalWindow();
+        }
+
+        else
+        {
+            outputBatmanTrailerInModalWindow();
+        }
     }
 
     else if(name=='Spider-Man: No Way Home')
     {
         if(type=='Trailer')
         {
-            outputSpidermanTrailer();
+            if(openedModalWindow!==null)
+            {
+                modalSearchWindow.classList.add('hide');
+                outputSpidermanTrailerInModalWindow();;
+            }
+
+            else
+            {
+                outputSpidermanTrailerInModalWindow();
+            }
         }
 
         else
         {
-            outputSpiderManMovie();
+            if(openedModalWindow!==null)
+            {
+                modalSearchWindow.classList.add('hide');
+                outputSpiderManMovieInModalWindow();
+            }
+
+            else
+            {
+                outputSpiderManMovieInModalWindow();
+            }
         }
     }
 }
 
-const bindItem=(item,resultArray)=>
+const filterArray=(item,array)=>
+{
+    return array.filter(data=>
+    {
+        let {name,type}=data;
+            
+        return item.textContent.includes(name) && item.textContent.includes(type);
+    });
+};
+
+const bindItemAutoComBox=(item,resultArray)=>
 {
     item.addEventListener('click',()=>
     {
-        let array=resultArray.filter(data=>
-        {
-            let {name,type}=data;
-            
-            return item.textContent.includes(name) && item.textContent.includes(type);
-        });
+        let array=filterArray(item,resultArray);
 
         outputVideo(array[0]);
+        clearAutoComBox();
     });
 };
 
@@ -481,4 +520,112 @@ const showSuggestions=list=>
         });
     }
     autoComBox.innerHTML=listData;
+};
+
+const searchFilm=userData=>
+{
+    userData=userData.toLocaleLowerCase();
+    return suggestions.filter(data=>
+    {
+        let {name}=data;
+        return name.toLocaleLowerCase().startsWith(userData);
+    });
+};
+
+searchIcon.addEventListener('click',()=>
+{
+    let userData=searchBar.value;
+
+    if(userData)
+    {
+        let resultArray=searchFilm(userData);
+        showResult(resultArray);
+        clearAutoComBox();
+    }
+
+    else
+    {
+        alert('Empty input. You should input film.');
+    }
+});
+
+const clearAutoComBox=()=>
+{
+    autoComBox.classList.remove('active');
+    autoComBox.innerHTML=``;
+}
+
+const showResult=list=>
+{
+    let listData='';
+    modalSearchWindow.classList.add('active');
+
+    if(!list.length)
+    {
+        let warning='<p>not found</p>';
+        listData=`${warning}`;
+    }
+
+    else
+    {
+        list.forEach(item=>
+        {
+            let {name,type,icon}=item;
+        
+            listData+=`
+                <li>
+                    <img src="${icon}" alt="icon">
+                    ${name}
+                    (${type})
+                </li>`;
+        });
+    }
+    
+
+    let searchModalDiv=`
+    <div class="modal__content">
+        <div class="modal__header">
+            <h1>Search result</h1>
+            <img src="img/cross.svg" alt="close">
+        </div>
+        <div class="modal__body">
+            <div class="modal__info">${listData}</div>
+        </div>
+    </div>`;
+    
+    modalSearchInner.innerHTML+=searchModalDiv;
+    bindItemsModal(list);
+    bindCloseSearchModal();
+};
+
+const bindItemsModal=list=>
+{
+    const modal=modalSearchInner.querySelector('.modal__content');
+    const items=modal.querySelectorAll('li');
+
+    items.forEach(item=>
+    {
+        item.addEventListener('click',()=>
+        {
+            let array=filterArray(item,list);
+
+            outputVideo(array[0],modalSearchWindow);
+        });
+    });
+};
+
+const closeSearchModal=()=>
+{
+    modalSearchWindow.classList.remove('active');
+    modalSearchInner.innerHTML=``;
+};
+
+const bindCloseSearchModal=()=>
+{
+    const closeButton=modalSearchInner.querySelector('.modal__header img');
+
+    closeButton.addEventListener('click',()=>
+    {
+        closeSearchModal();
+    });
 };

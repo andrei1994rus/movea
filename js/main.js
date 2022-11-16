@@ -6,7 +6,7 @@ const buttonShowModalSpidermanTrailer=document.querySelectorAll('.spiderman_trai
 const buttonShowModalBatmanTrailer=document.querySelectorAll('.batman_trailer-js');
 let buttonShowModalSpidermanMovie;
 const headerPersonal=document.querySelector('.header__personal');
-const headerNavLink=document.querySelectorAll('.header__nav a');
+let headerNavLink=document.querySelectorAll('.header__nav a');
 const headerTime=document.querySelector('.header__time');
 const headerDay=document.querySelector('.header__day');
 let titleTrendingAllMovies;
@@ -16,9 +16,20 @@ const divPopular=document.querySelector('.popular-js');
 const nonSelectedGenres=document.querySelectorAll('.gray');
 const asideAdd=document.querySelector('.aside__add');
 const favouriteGenres=document.querySelector('.favourite-js');
-const searchBar=document.querySelector('.header__find').firstElementChild;
-const autoComBox=document.querySelector('.header__find').lastElementChild;
+let searchBar=document.querySelector('.header__find').firstElementChild;
+let autoComBox=document.querySelector('.header__find').lastElementChild;
 const searchIcon=document.querySelector('.header__find img');
+const burger=document.querySelector('.header__burger-icon');
+const burgerMenu=document.querySelector('.header__burger-nav');
+let headerBurgerNavLink=document.querySelectorAll('.header__burger-nav a');
+let searchBar_s=document.querySelector('.header__find-s').firstElementChild;
+let searchIcon_s=document.querySelector('.header__find-s').lastElementChild;
+let input_close=document.querySelector('.input_close');
+
+let widthScreen=window.screen.width;
+let spiderman_trailer;
+let batman_trailer;
+let spiderman_movie;
 
 const alertMessage='You are guest. But this site doesn\'t have authorization.';
 
@@ -57,21 +68,152 @@ const suggestions=[
     }
 ];
 
+let selectedLink='';
+
 window.onload=()=>
 {
     time();
+
+    spiderman_trailer=setSpidermanTrailer(widthScreen);
+    batman_trailer=setBatmanTrailer(widthScreen);
+    spiderman_movie=setSpidermanMovie(widthScreen);
 
     bindTitleTrendingAllMovies();
     bindTitlePopularAllMovies();
     bindButtonShowModalSpidermanMovie();
 
 	this.interval=setInterval(()=>time(),1000);
+
+    bindNavLinks();
 };
+
+window.onresize=()=>
+{
+    widthScreen=window.screen.width;
+    spiderman_trailer=setSpidermanTrailer(widthScreen);
+    spiderman_movie=setSpidermanMovie(widthScreen);
+    batman_trailer=setBatmanTrailer(widthScreen);
+
+    bindButtonShowModalSpidermanMovie();
+    bindNavLinks();
+};
+
+const setSpidermanTrailer=width=>(width<420) ? `<iframe width="260" height="260" 
+    src="https://www.youtube.com/embed/V0hagz_8L3M" 
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen></iframe>` : (width>=420 && width<760) ? `<iframe width="300" height="300" 
+    src="https://www.youtube.com/embed/V0hagz_8L3M" 
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen></iframe>`: `<iframe width="600" height="450" 
+    src="https://www.youtube.com/embed/V0hagz_8L3M" 
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen></iframe>`;
+
+const setBatmanTrailer=width=>(width<420) ? `<iframe width="260" height="260" 
+    src="https://www.youtube.com/embed/g8Y_GL5h7Fs" 
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen></iframe>` : (width>=420 && width<760) ? `<iframe width="300" height="300" 
+    src="https://www.youtube.com/embed/g8Y_GL5h7Fs" 
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen></iframe>`: `<iframe width="600" height="450" 
+    src="https://www.youtube.com/embed/g8Y_GL5h7Fs" 
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen></iframe>`;
+
+const setSpidermanMovie=width=>(width<420) ? `<video width="260" height="260"  preload="auto" poster="img/poster.png" controls> 
+    <source src="video/spiderman_trailer.mp4" type="video/mp4">
+    <source src="video/spiderman_trailer.webm" type="video/webm">
+    <source src="video/spiderman_trailer.ogv" type="video/ogg">
+    <object data="video/spiderman_trailer.swf" type="application/x-shockwave-flash">
+        <param name="movie" value="video/spiderman_trailer.swf">
+    </object>
+    </video>` : (width>=420 && width<760) ? `<video width="300" height="300" preload="auto" poster="img/poster.png" controls>
+    <source src="video/spiderman_trailer.mp4" type="video/mp4">
+    <source src="video/spiderman_trailer.webm" type="video/webm">
+    <source src="video/spiderman_trailer.ogv" type="video/ogg">
+    <object data="video/spiderman_trailer.swf" type="application/x-shockwave-flash">
+        <param name="movie" value="video/spiderman_trailer.swf">
+    </object>
+    </video>`: `<video width="600" height="450" preload="auto" poster="img/poster.png" controls>
+    <source src="video/spiderman_trailer.mp4" type="video/mp4">
+    <source src="video/spiderman_trailer.webm" type="video/webm">
+    <source src="video/spiderman_trailer.ogv" type="video/ogg">
+    <object data="video/spiderman_trailer.swf" type="application/x-shockwave-flash">
+        <param name="movie" value="video/spiderman_trailer.swf">
+    </object>
+    </video>`;
 
 const outputSpiderManMovieInModalWindow=()=>
 {
-    modalVideoWindow.classList.add('active');    
+    modalVideoWindow.classList.add('active');
     modalVideoInner.innerHTML=`${spiderman_movie}`;
+}
+
+const bindNavLinks=()=>
+{
+    if(widthScreen>769)
+    {
+        bindHeaderNavLinks();
+    }
+
+    else
+    {
+        bindHeaderBurgerNavLinks();
+    }
+}
+
+const bindHeaderBurgerNavLinks=()=>
+{
+    headerBurgerNavLink=document.querySelectorAll('.header__burger-nav a');
+    
+    headerBurgerNavLink.forEach(item=>
+    {
+        if(item.textContent===selectedLink)
+        {
+            item.classList.add('current');
+        }
+
+        item.addEventListener('click',()=>
+        {
+            let curentNavLink=document.querySelectorAll('.current');
+            curentNavLink.forEach(current=>current.classList.remove('current'));
+            item.classList.add('current');
+            selectedLink=item.textContent;
+        });
+    });
+}
+
+const bindHeaderNavLinks=()=>
+{
+    headerNavLink=document.querySelectorAll('.header__nav a');
+
+    headerNavLink.forEach(item=>
+    {
+        if(item.textContent===selectedLink)
+        {
+            item.classList.add('current');
+        }
+
+        item.addEventListener('click',()=>
+        {
+            let curentNavLink=document.querySelectorAll('.current');
+            curentNavLink.forEach(current=>current.classList.remove('current'));
+            item.classList.add('current');
+            selectedLink=item.textContent;
+        });
+    });
 }
 
 const bindButtonShowModalSpidermanMovie=()=>
@@ -88,6 +230,7 @@ const bindButtonShowModalSpidermanMovie=()=>
 
 const bindTitleTrendingAllMovies=()=>
 {
+    widthScreen=window.screen.width;
     titleTrendingAllMovies=document.querySelector('.trending__all_movies-js');
     titleTrendingAllMovies.addEventListener('click',function()
     {
@@ -112,6 +255,7 @@ const bindTitleTrendingAllMovies=()=>
 
 const bindTitlePopularAllMovies=()=>
 {
+    widthScreen=window.screen.width;
     titlePopularAllMovies=document.querySelector('.popular__all_movies-js');
     titlePopularAllMovies.addEventListener('click',function()
     {   
@@ -190,27 +334,6 @@ const time=()=>
     headerDay.innerText=date;
 };
 
-const spiderman_trailer=`<iframe width="560" height="315" 
-    src="https://www.youtube.com/embed/V0hagz_8L3M" 
-    title="YouTube video player"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen></iframe>`;
-const batman_trailer=`<iframe width="560" height="315" 
-    src="https://www.youtube.com/embed/g8Y_GL5h7Fs"
-    title="YouTube video player"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen></iframe>`;
-const spiderman_movie=`<video width="560" height="315" preload="auto" poster="img/poster.png" controls>
-        <source src="video/spiderman_trailer.mp4" type="video/mp4">
-        <source src="video/spiderman_trailer.webm" type="video/webm">
-        <source src="video/spiderman_trailer.ogv" type="video/ogg">
-        <object data="video/spiderman_trailer.swf" type="application/x-shockwave-flash">
-            <param name="movie" value="video/spiderman_trailer.swf">
-        </object>
-    </video>`;
-
 const trending_all_movies=`
 <div class="trending shown">
     <div class="trending__item">
@@ -246,6 +369,7 @@ const trending_all_movies=`
         </div>
     </div>
 </div>`;
+
 const popular__all_movies=`
 <div class="popular shown">
     <div class="popular__item">
@@ -364,16 +488,6 @@ modalVideoWindow.addEventListener('click',e=>
 
 headerPersonal.addEventListener('click',()=>alert(alertMessage));
 
-headerNavLink.forEach(item=>
-{
-    item.addEventListener('click',()=>
-    {
-        let curentNavLink=document.querySelector('.current');
-        curentNavLink.classList.remove('current');
-        item.classList.add('current');
-    });
-});
-
 const selectClassName=item=>colors[item.textContent];
 
 nonSelectedGenres.forEach(item=>
@@ -422,6 +536,41 @@ searchBar.addEventListener('keyup',e=>
     }
 });
 
+searchBar_s.addEventListener('keydown',e=>
+{
+    let userData=e.target.value;
+    let resultArray=[];
+
+    if(e.keyCode===13)
+    {
+        if(userData)
+        {
+            let resultArray=searchFilm(userData);
+            showResult(resultArray);
+            e.target.classList.remove('shown');
+            input_close.classList.remove('shown');
+        }
+
+        else
+        {
+            alert('Empty input. You should input film.');
+        }
+    }
+});
+
+searchIcon_s.addEventListener('click',e=>
+{
+    searchBar_s.classList.add('shown');
+    input_close.classList.add('shown');
+});
+
+input_close.addEventListener('click',()=>
+{
+    searchBar_s.value='';
+    searchBar_s.classList.remove('shown');
+    input_close.classList.remove('shown');
+});
+
 const outputVideo=(suggestion,openedModalWindow=null)=>
 {
     let {name,type}=suggestion;
@@ -447,7 +596,7 @@ const outputVideo=(suggestion,openedModalWindow=null)=>
             if(openedModalWindow!==null)
             {
                 modalSearchWindow.classList.add('hide');
-                outputSpidermanTrailerInModalWindow();;
+                outputSpidermanTrailerInModalWindow();
             }
 
             else
@@ -519,6 +668,7 @@ const showSuggestions=list=>
             </li>`;
         });
     }
+
     autoComBox.innerHTML=listData;
 };
 
@@ -629,3 +779,8 @@ const bindCloseSearchModal=()=>
         closeSearchModal();
     });
 };
+
+burger.addEventListener('click',()=>
+{
+    burgerMenu.classList.toggle('shown');
+});

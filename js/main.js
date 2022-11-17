@@ -545,7 +545,7 @@ searchBar_s.addEventListener('keydown',e=>
     {
         if(userData)
         {
-            let resultArray=searchFilm(userData);
+            resultArray=searchFilm(userData);
             showResult(resultArray);
             e.target.classList.remove('shown');
             input_close.classList.remove('shown');

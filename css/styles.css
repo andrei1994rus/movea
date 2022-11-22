@@ -240,7 +240,7 @@ input {
     width: 6rem;
     height: 6rem;
     border-radius: 50%;
-    margin-left: 8rem;
+    margin-left: 7.5rem;
 }
 
 .main-display {
@@ -1381,8 +1381,17 @@ input {
         font-size: 5.5px;
     }
 
+    .header__wrap {
+        position: relative;
+    }
+
     .header__day {
         font-size: 1.7rem;
+    }
+
+    .header__personal {
+        position: absolute;
+        right: 2%;
     }
 
     .autocom-box li {
@@ -1540,9 +1549,8 @@ input {
     }
 
     .modal__info li {
-        padding: 2rem 5rem 2rem 2rem;
+        padding: 2rem 5.5rem 2rem 2rem;
         font-size: 3rem;
-        cursor: pointer;
     }
 
     .header__nav {
@@ -1550,7 +1558,7 @@ input {
     }
 
     .header__find {
-        width: 24.5rem;
+        width: 22.5rem;
         margin-right: 2rem;
     }
 
@@ -1559,7 +1567,8 @@ input {
     }
 
     .header__personal {
-        margin-left: 2rem;
+        position: absolute;
+        right: 2%;
     }
 
     .main-display__views, .aside__views {
@@ -1727,19 +1736,15 @@ input {
     }
 
     .header__find {
-        width: 20rem;
+        width: 30%;
     }
-
-    .header__date {
-        margin-left: 2rem;
-    } 
 
     .header__day {
         font-size: 1.5rem;
     }
 
     .header__personal {
-        margin-left: 3rem;
+        right: 1%;
     }
 
     .autocom-box li {
@@ -1806,8 +1811,7 @@ input {
     }
 
     .header__find {
-        width: 23rem;
-        margin-right: .2rem;
+        width: 18rem;
     }
     
     .header__date {
@@ -1822,17 +1826,14 @@ input {
         font-size: 1.6rem;
     }
 
-    .header__personal {
-        margin-left: 2.5rem;
-    }
-
     .autocom-box.active p {
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
 
     .autocom-box li {
-        font-size: 2.5rem;
+        font-size: 2rem;
         padding-left: .7rem;
+        padding-right: 5rem;
     }
 
     .title__main {
@@ -1950,21 +1951,12 @@ input {
     .autocom-box.active li img, .modal__body li img {
         height: 10rem;
     }
-
-    .modal-search__inner {
-        height: 100rem;
-    }
 }
 
 /*544px=34em*/
 @media (max-width: 34em) {
     html {
         font-size: 7px;
-    }
-
-    .header__wrap {
-        position: relative;
-        padding-right: 1rem;
     }
 
     .header__burger-nav.shown a {
@@ -1997,11 +1989,6 @@ input {
         display: none;
     }
 
-    .header__personal {
-        position: absolute;
-        right: 2%;
-    }
-
     .header__find-s input.shown {
         position: absolute;
         display: block;
@@ -2009,8 +1996,17 @@ input {
         top: 0%;
         z-index: 900;
         width: 100%;
-        height: 15vh;
+        height: 7rem;
         font-size: 3rem;
+    }
+
+    .header__find-s .autocom-box.active {
+        position: absolute;
+        top: 100%;
+        left: 0%;
+        width: 100%;
+        z-index: 999;
+        margin-top: 1.5rem;
     }
 
     .header__time {
@@ -2129,14 +2125,6 @@ input {
 
     .header__find-s input.shown {
         font-size: 3.5rem;
-    }
-
-    .header__time {
-        font-size: 2.4rem;
-    }
-
-    .header__day {
-        font-size: 2.4rem;
     }
 
     .button-play__wrap {
@@ -2260,8 +2248,12 @@ input {
         padding-right: 10rem;
     }
 
+    .modal-search__inner {
+        height: 85rem;
+    }
+
     .modal__info li {
-        padding-right: 7rem;
+        padding-right: 8rem;
     }
 
     .modal__content {
@@ -2389,10 +2381,5 @@ input {
 
     .aside__add {
         font-size: 2.7rem;
-    }
-
-    .modal__info li {
-        font-size: 3rem;
-        line-height: 120%;
     }
 }   

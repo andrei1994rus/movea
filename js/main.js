@@ -17,7 +17,7 @@ const nonSelectedGenres=document.querySelectorAll('.gray');
 const asideAdd=document.querySelector('.aside__add');
 const favouriteGenres=document.querySelector('.favourite-js');
 let searchBar=document.querySelector('.header__find').firstElementChild;
-let autoComBox=document.querySelector('.header__find').lastElementChild;
+let autoComBox;
 const searchIcon=document.querySelector('.header__find img');
 const burger=document.querySelector('.header__burger-icon');
 const burgerMenu=document.querySelector('.header__burger-nav');
@@ -85,6 +85,7 @@ window.onload=()=>
 	this.interval=setInterval(()=>time(),1000);
 
     bindNavLinks();
+    autoComBox=setAutoComBox();
 };
 
 window.onresize=()=>
@@ -96,7 +97,52 @@ window.onresize=()=>
 
     bindButtonShowModalSpidermanMovie();
     bindNavLinks();
+    autoComBox=setAutoComBox();
 };
+
+const setAutoComBox=()=>
+{
+    return (widthScreen<545) ?
+        document.querySelector('.header__find-s').querySelector('.autocom-box')
+        : document.querySelector('.header__find').lastElementChild;
+};
+
+searchBar_s.addEventListener('keyup',e=>
+{
+    searchResult(e);
+
+    let userData=e.target.value;
+    let resultArray=[];
+
+    if(e.keyCode===13)
+    {
+        if(userData)
+        {
+            resultArray=searchFilm(userData);
+            showResult(resultArray);
+            clearAutoComBox();
+        }
+
+        else
+        {
+            alert('Empty input. You should input film.');
+        }
+
+        clearSearchBarS();
+    }
+});
+
+const clearSearchBarS=()=>
+{
+    searchBar_s.value='';
+    searchBar_s.classList.remove('shown');
+    input_close.classList.remove('shown');
+};
+
+searchBar.addEventListener('keyup',e=>
+{
+    searchResult(e);
+});
 
 const setSpidermanTrailer=width=>(width<420) ? `<iframe width="260" height="260" 
     src="https://www.youtube.com/embed/V0hagz_8L3M" 
@@ -511,18 +557,17 @@ asideAdd.addEventListener('click',()=>
     });
 });
 
-searchBar.addEventListener('keyup',e=>
+const searchResult=e=>
 {
     let userData=e.target.value;
     let resultArray=[];
 
     if(userData)
     {
-        resultArray=searchFilm(userData);
-        
+        resultArray=searchFilm(userData);   
         autoComBox.classList.add('active');
         showSuggestions(resultArray);
-        
+            
         let arrList=autoComBox.querySelectorAll('li');
         for(item of arrList)
         {
@@ -534,29 +579,7 @@ searchBar.addEventListener('keyup',e=>
     {
         clearAutoComBox();
     }
-});
-
-searchBar_s.addEventListener('keydown',e=>
-{
-    let userData=e.target.value;
-    let resultArray=[];
-
-    if(e.keyCode===13)
-    {
-        if(userData)
-        {
-            resultArray=searchFilm(userData);
-            showResult(resultArray);
-            e.target.classList.remove('shown');
-            input_close.classList.remove('shown');
-        }
-
-        else
-        {
-            alert('Empty input. You should input film.');
-        }
-    }
-});
+};
 
 searchIcon_s.addEventListener('click',e=>
 {
@@ -566,9 +589,8 @@ searchIcon_s.addEventListener('click',e=>
 
 input_close.addEventListener('click',()=>
 {
-    searchBar_s.value='';
-    searchBar_s.classList.remove('shown');
-    input_close.classList.remove('shown');
+    clearSearchBarS();
+    clearAutoComBox();
 });
 
 const outputVideo=(suggestion,openedModalWindow=null)=>
@@ -686,16 +708,17 @@ searchIcon.addEventListener('click',()=>
 {
     let userData=searchBar.value;
 
-    if(userData)
+    if(!userData)
+    {
+        alert('Empty input. You should input film.');
+    }
+    
+    else
     {
         let resultArray=searchFilm(userData);
         showResult(resultArray);
+        searchBar.value='';
         clearAutoComBox();
-    }
-
-    else
-    {
-        alert('Empty input. You should input film.');
     }
 });
 

@@ -10,7 +10,7 @@ it's page layout Movies (also this is started page). Only this page is available
 - Search movies and trailers;
 - Show hiden movies after click All movies; 
 - Hide shown movies after click Hide;
-- Adaptive and crossbrowser;
+- Adaptive and crossbrowser (excluding IE);
 - Output search result and video in modal;
 - Output current date and current time;
 - Add favourite genres;
@@ -28,4 +28,5 @@ it's page layout Movies (also this is started page). Only this page is available
 - VS Code plugin: autoprefixer.
 ---
 [Design](https://andrei1994rus.github.io/movea/layout/Movea_OnlineCinema.fig)-also it's in directory layout.
+
 [URL](https://andrei1994rus.github.io/movea).
